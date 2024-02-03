@@ -13,8 +13,14 @@ main().catch((error) => {
     process.exitCode = 1;
 });
 
-// npx hardhat run  scripts/deployment/deploy.ts --network mumbai
+// npx hardhat run  scripts/deployment/deploy.ts --network sepolia 
 
 // npx hardhat run  scripts/deployment/deploy.ts --network meterTestnet
 
-// `whaleTest` is deployed to 0x76A7B038300C2a4304e3C2e72f3808bfA3EF2DAa.
+
+
+
+// sepolia testnet 
+// whaleTest` is deployed to 0x2771A18EAeDB37550A4843Cd8392e8A7db6E72D8
+// meter testnet 
+// `whaleTest` is deployed to 0x76A7B038300C2a4304e3C2e72f3808bfA3EF2DAa

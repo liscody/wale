@@ -184,7 +184,7 @@ const config: HardhatUserConfig = {
         apiKey: {
             mainnet: "ETHERSCAN_API_KEY",
             goerli: "ETHERSCAN_API_KEY",
-            sepolia: "ETHERSCAN_API_KEY",
+            sepolia: process.env.ETHERSCAN_API_KEY || "",
             polygon: "POLYGONSCAN_API_KEY",
             polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
             nova: process.env.NOVA_API_KEY || ""
