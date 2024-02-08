@@ -58,6 +58,14 @@ contract WhaleTest is ONFT721 {
         );
     }
 
+    function getOwnedNFTs(address _owner) external view returns (uint256[] memory) {
+        uint256[] memory owned = new uint256[](balanceOf(_owner));
+        for (uint256 i = 0; i < owned.length; i++) {
+            owned[i] = tokenOfOwnerByIndex(_owner, i);
+        }
+        return owned;
+    }
+
     function tokenURI(uint256 id) public view virtual override returns (string memory) {
         return string(abi.encodePacked(_baseURI(), Strings.toString(id), ".json"));
     }
