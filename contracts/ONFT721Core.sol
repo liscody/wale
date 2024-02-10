@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT
-import "@layerzerolabs/solidity-examples/contracts/lzApp/NonblockingLzApp.sol";
-import "@openzeppelin/contracts/utils/introspection/ERC165.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-import "../contracts/interfaces/IONFT721Core.sol";
+
+import "./NonblockingLzApp.sol";
+import "./ERC165.sol";
+import "./ReentrancyGuard.sol";
+import "./IONFT721Core.sol";
 
 pragma solidity ^0.8.18;
 

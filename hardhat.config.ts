@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import { HardhatUserConfig } from "hardhat/config";
+
 // Official plugins.
 /*
  * The toolbox (`@nomicfoundation/hardhat-toolbox`) contains:
@@ -52,9 +53,29 @@ const ETHEREUM_TESTNET_KEYS: string[] = process.env.ETHEREUM_TESTNET_KEYS ?
 // const POLYGON_TESTNET_KEYS: string[] = process.env.POLYGON_TESTNET_KEYS ?
 //     process.env.POLYGON_TESTNET_KEYS.split(",") : [];
 // prettier-ignore
-const METER_TESTNET_KEYS: string[] = process.env.METER_TESTNET_KEYS ? 
-    process.env.METER_TESTNET_KEYS.split(",") : [];
+const METER_MAINNET_KEYS: string[] = process.env.METER_MAINNET_KEYS ? 
+    process.env.METER_MAINNET_KEYS.split(",") : [];
 
+const SEPOLIA_MAINNET_KEYS: string[] = process.env.SEPOLIA_MAINNET_KEYS ? 
+    process.env.SEPOLIA_MAINNET_KEYS.split(",") : [];
+
+const MOONRIVER_MAINNET_KEYS: string[] = process.env.MOONRIVER_MAINNET_KEYS ?
+    process.env.MOONRIVER_MAINNET_KEYS.split(",") : []; 
+
+const HARMONY_MAINNET_KEYS: string[] = process.env.HARMONY_MAINNET_KEYS ?
+    process.env.HARMONY_MAINNET_KEYS.split(",") : [];
+
+const ZORA_MAINNET_KEYS: string[] = process.env.ZORA_MAINNET_KEYS ?
+    process.env.ZORA_MAINNET_KEYS.split(",") : [];
+
+const OPBNB_MAINNET_KEYS: string[] = process.env.OPBNB_MAINNET_KEYS ?
+    process.env.OPBNB_MAINNET_KEYS.split(",") : [];
+    
+const KLAYTN_MAINNET_KEYS: string[] = process.env.KLAYTN_MAINNET_KEYS ?
+    process.env.KLAYTN_MAINNET_KEYS.split(",") : [];
+
+const KAVA_MAINNET_KEYS: string[] = process.env.KAVA_MAINNET_KEYS ?
+    process.env.KAVA_MAINNET_KEYS.split(",") : [];
 /*
  * The solc compiler optimizer configuration. (The optimizer is disabled by default).
  *
@@ -71,7 +92,7 @@ const config: HardhatUserConfig = {
     solidity: {
         compilers: [
             {
-                version: "0.8.18",
+                version: "0.8.19",
                 settings: {
                     optimizer: {
                         enabled: ENABLED_OPTIMIZER,
@@ -129,13 +150,42 @@ const config: HardhatUserConfig = {
         },
         sepolia: {
             url: process.env.SEPOLIA_URL || "",
-            accounts: [...ETHEREUM_TESTNET_KEYS]
+            accounts: [...SEPOLIA_MAINNET_KEYS]
         },
-        meterTestnet: {
+        meter: {
             url: process.env.METER_URL || "",
-            accounts: [...METER_TESTNET_KEYS],
-            chainId: 83
-        } //,
+            accounts: [...METER_MAINNET_KEYS],
+            chainId: 82
+        },
+        moonriver: {
+            url: process.env.MOONRIVER_URL || "",
+            accounts: [...MOONRIVER_MAINNET_KEYS],
+        },
+        harmony: {
+            url: process.env.HARMONY_URL || "",
+            accounts: [...HARMONY_MAINNET_KEYS],
+        },
+        zora: {
+            url: process.env.ZORA_URL || "",
+            accounts: [...ZORA_MAINNET_KEYS],
+            chainId: 7777777
+        },
+        opbnb: {
+            url: process.env.OPBNB_URL || "",
+            accounts: [...OPBNB_MAINNET_KEYS],
+            chainId: 204
+        },
+        klaytn: {
+            url: "https://klaytn-pokt.nodies.app" || "",
+            accounts: [...KLAYTN_MAINNET_KEYS],
+            chainId: 8217
+        },
+        kava: {
+            url: process.env.KAVA_URL || "",
+            accounts: [...KAVA_MAINNET_KEYS],
+            chainId: 2222
+        }
+        //,
         // // Polygon.
         // // Example of adding of other networks.
         // polygon: {
@@ -184,10 +234,16 @@ const config: HardhatUserConfig = {
         apiKey: {
             mainnet: "ETHERSCAN_API_KEY",
             goerli: "ETHERSCAN_API_KEY",
-            sepolia: process.env.ETHERSCAN_API_KEY || "",
+            sepolia: process.env.SEPOLIA_API_KEY || "",
             polygon: "POLYGONSCAN_API_KEY",
             polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
-            nova: process.env.NOVA_API_KEY || ""
+            nova: process.env.NOVA_API_KEY || "",
+            moonriver: process.env.MOONRIVER_API_KEY || "",
+            harmony: process.env.MOONRIVER_API_KEY || "",
+            zora: process.env.ZORA_API_KEY || "",
+            opbnb: process.env.OPBNB_API_KEY || "",
+            klaytn: process.env.OPBNB_API_KEY || "",
+            kava: process.env.KAVA_API_KEY || ""
         },
         customChains: [
             {
@@ -199,11 +255,43 @@ const config: HardhatUserConfig = {
                 }
             },
             {
-                network: "meterTestnet",
-                chainId: 83,
+                network: "meter",
+                chainId: 82,
                 urls: {
                     apiURL: "https://meter.blockpi.network/v1/rpc/public",
                     browserURL: "https://scan-warringstakes.meter.io"
+                }
+            },
+            {
+                network: "zora",
+                chainId: 7777777,
+                urls: {
+                    apiURL: "https://api.routescan.io/v2/network/mainnet/evm/7777777/etherscan",
+                    browserURL: "https://zorascan.xyz"
+                }
+            },
+            {
+                network: "opbnb",
+                chainId: 204,
+                urls: {
+                    apiURL: "https://api-opbnb.bscscan.com/api",
+                    browserURL: "https://opbnb.bscscan.com/"
+                }
+            },
+            {
+                network: "klaytn",
+                chainId: 8217,
+                urls: {
+                    apiURL: "",
+                    browserURL: "https://klaytnscope.com/"
+                }
+            },
+            {
+                network: "kava",
+                chainId: 2222,
+                urls: {
+                    apiURL: "https://kavascan.com/api",
+                    browserURL: "https://kavascan.com/"
                 }
             }
         ]
@@ -287,3 +375,6 @@ if (process.env.GAS_PRICE_API_URL)
     config.gasReporter!.gasPriceApi = process.env.GAS_PRICE_API_URL;
 
 export default config;
+
+
+// npx hardhat flatten contracts/WhaleRefule.sol > Flattened.sol
