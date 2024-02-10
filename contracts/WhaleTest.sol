@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
-
 import "./ONFT721.sol";
 
 pragma solidity ^0.8.18;
 
 /// @title Interface of Whale, which follows the UniversalONFT standard
-contract WhaleTest is ONFT721 {
+contract Whale is ONFT721 {
     uint256 public fee = 0.00001 ether;
 
     uint256 public nextMintId;
@@ -20,7 +19,7 @@ contract WhaleTest is ONFT721 {
         address _layerZeroEndpoint,
         uint256 _startMintId,
         uint256 _endMintId
-    ) ONFT721("WhaleTest ONFT", "TWHL", _minGasToTransfer, _layerZeroEndpoint) {
+    ) ONFT721("Whale ONFT", "WHL", _minGasToTransfer, _layerZeroEndpoint) {
         nextMintId = _startMintId;
         maxMintId = _endMintId;
     }
@@ -59,12 +58,20 @@ contract WhaleTest is ONFT721 {
         );
     }
 
+    function getOwnedNFTs(address _owner) external view returns (uint256[] memory) {
+        uint256[] memory owned = new uint256[](balanceOf(_owner));
+        for (uint256 i = 0; i < owned.length; i++) {
+            owned[i] = tokenOfOwnerByIndex(_owner, i);
+        }
+        return owned;
+    }
+
     function tokenURI(uint256 id) public view virtual override returns (string memory) {
-        return string(abi.encodePacked(_baseURI(), Strings.toString(id)));
+        return string(abi.encodePacked(_baseURI(), Strings.toString(id), ".json"));
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://QmXt6KM4y2TT3FVhR7LovfRvajweGyaz9vzUu2Q1tuheWa";
+        return "ipfs://bafybeichzo7647snnh3k6ejbyqfoox4s4u6uyk3wkp2am5vz6crufg77z4/";
     }
 
     function withdraw() public payable onlyOwner {
